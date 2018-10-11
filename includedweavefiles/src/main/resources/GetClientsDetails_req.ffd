@@ -1,0 +1,44 @@
+form: COPYBOOK
+id: 'GETCLIENTSDETAILS001'
+values: 
+- { name: 'MSGPROTOCOL', type: String, length: 4 }
+- { name: 'MSGPROTOCOLVERSIONNUM', type: String, length: 3 }
+- { name: 'MSGTYPECDE', type: String, length: 1 }
+- { name: 'MSGCLIENTOPERID', type: String, length: 20 }
+- { name: 'MSGSENDERAPPLID', type: String, length: 20 }
+- { name: 'MSGNAME', type: String, length: 50 }
+- { name: 'MSGVERSIONNUM', type: String, length: 3 }
+- name: 'KEYS'
+  values: 
+  - { name: 'KEYCNT', type: String, length: 2 }
+  - name: 'KEY'
+    count: 10
+    values: 
+    - { name: 'LEGALENTITYID', type: String, length: 10 }
+    - { name: 'LEGENTIDSRCCDE', type: String, length: 3 }
+    - { name: 'LEGENTTYPECDE', type: String, length: 6 }
+    - { name: 'BASELEGALENTITYID', type: String, length: 10 }
+    - { name: 'NMUNIQUEID', type: String, length: 10 }
+- name: 'FILTER'
+  values: 
+  - name: 'LEGALENTITY'
+    values: 
+    - { name: 'CLTLIFECYCLECDE', type: String, length: 5 }
+- name: 'CLIENTSDETAILS'
+  values: 
+  - { name: 'LEGALENTITYCNT', type: String, length: 1 }
+  - name: 'LEGALENTITY'
+    values: 
+    - { name: 'LEGALENTITYID', type: String, length: 1 }
+    - { name: 'LEGENTIDSRCCDE', type: String, length: 1 }
+    - { name: 'LEGENTTYPECDE', type: String, length: 1 }
+    - { name: 'BASELEGALENTITYID', type: String, length: 1 }
+    - { name: 'CLTLIFECYCLECDE', type: String, length: 1 }
+    - { name: 'ADDRESSCNT', type: String, length: 1 }
+    - name: 'ADDRESS'
+      values: 
+      - { name: 'STREETADRTXT', type: String, length: 1 }
+      - { name: 'STATEPROVCDE', type: String, length: 1 }
+      - { name: 'CITYNAM', type: String, length: 1 }
+      - { name: 'ZIPCDE', type: String, length: 1 }
+      

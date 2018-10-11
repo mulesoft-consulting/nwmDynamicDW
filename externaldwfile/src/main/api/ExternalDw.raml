@@ -1,0 +1,22 @@
+#%RAML 0.8
+title: Sample API
+/:
+  post:
+    headers:
+      inputflatfile:
+        type: boolean
+        required: true
+      transformset:
+        type: string
+        required: true
+      schemaconfig:
+        type: string
+        required: true
+    body:
+      text/plain:
+      application/xml:
+    responses:
+      200:
+        body:
+          text/plain:
+          application/xml:
