@@ -1,0 +1,14 @@
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="WebSphereMQConnectionFactory" name="WebSphereMQConnectionFactory" class="com.ibm.mq.jms.MQConnectionFactory">
+	    <property name="hostName" value="${wmq.host}"/>
+	    <property name="port" value="${wmq.port}"/>
+	    <property name="queueManager" value="${wmq.qm}"/>
+	    <property name="transportType"  value="1"/>
+	    <property name="channel" value="${wmq.channel}"/>          
+	</bean>
+
+</beans>

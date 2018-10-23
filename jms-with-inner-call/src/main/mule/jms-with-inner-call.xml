@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:spring="http://www.mulesoft.org/schema/mule/spring"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/spring http://www.mulesoft.org/schema/mule/spring/current/mule-spring.xsd">
+
+	<jms:config name="JMS_Config" doc:name="JMS Config" doc:id="b33a6379-9347-4282-a0a1-6142698a7f2d" >
+		<jms:generic-connection specification="JMS_2_0" connectionFactory="WebSphereMQConnectionFactory">
+		</jms:generic-connection>
+	</jms:config>
+	<jms:config name="JMS_Config_No_Ack" doc:name="JMS Config_No_Ack" doc:id="d00c7b12-d577-46e6-8cab-aeee36f0518b" >
+		<jms:generic-connection specification="JMS_2_0" connectionFactory="WebSphereMQConnectionFactory">
+		</jms:generic-connection>
+		<jms:consumer-config ackMode="MANUAL" />
+	
+</jms:config>
+	<spring:config name="Spring_Config" doc:name="Spring Config" doc:id="63bbb32f-7939-47fc-8054-aa16c7075800" files="springConfig.xml" />
+	<sub-flow name="jms-with-inner_get-metadata" doc:id="cfa0d351-3462-44bb-924b-f84d5a18f5bb" >
+		<jms:consume doc:name="Consume" doc:id="56359a2e-54d8-442a-9299-9c2fb02fb967" config-ref="JMS_Config_No_Ack" destination="${wmq.input.metadata}" ackMode="MANUAL" transactionalAction="NOT_SUPPORTED" />
+		<jms:recover-session doc:name="Recover session" doc:id="264651c5-fbe8-4a50-9392-d29a4365fb6d" ackId="#[attributes.ackId]"/>
+	</sub-flow>
+	<flow name="jms-with-inner-callFlow" doc:id="ff86827d-1d75-4c20-90ed-bba62cdaed31" >
+		<jms:listener doc:name="Listener" doc:id="3ed82c01-c988-4051-a575-a92cbde4986f" config-ref="JMS_Config" transactionalAction="ALWAYS_BEGIN" destination="${wmq.input.queue}" ackMode="AUTO"/>
+		<flow-ref doc:name="Flow Reference" doc:id="2c1b0aae-b663-441e-b802-f2ec0d1ee7df" name="jms-with-inner_get-metadata" target="metadata" targetValue="#[payload]	"/>
+	</flow>
+</mule>

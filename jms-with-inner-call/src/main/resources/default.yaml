@@ -1,0 +1,8 @@
+wmq:
+  host: "127.0.0.1"
+  port: "1420"
+  channel: "SERVER.CHANNEL"
+  qm: "QM1"
+  input:
+    queue: "MY.INPUT.QUEUE"
+    metadata: "MY.METADATA.QUEUE"
